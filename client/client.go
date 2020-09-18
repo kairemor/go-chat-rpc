@@ -59,7 +59,7 @@ func (c *ChatClient) Create() {
 	}
 }
 
-//FindAllMessages
+//FindAllMessages ...
 func (c *ChatClient) FindAllMessages(DoneChan chan int) {
 	go func() {
 		<-DoneChan
@@ -81,7 +81,7 @@ func (c *ChatClient) FindAllMessages(DoneChan chan int) {
 // NewMessage to chat
 func (c *ChatClient) NewMessage(message *shared.Message) {
 	args := &shared.NewMessageArgs{Message: message}
-	resp := &shared.SendMessageResp{}
+	resp := &shared.NewMessageResp{}
 	err := c.Conn.Call(NewMessage, args, resp)
 	if err != nil {
 		log.Fatal(err)
@@ -91,7 +91,7 @@ func (c *ChatClient) NewMessage(message *shared.Message) {
 	}
 }
 
-//Handle
+//Handle ...
 func (c *ChatClient) Handle() {
 	DoneChan := make(chan int)
 	defer c.End()
